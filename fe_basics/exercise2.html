@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 2 - Forms</title>
+</head>
+<body>
+    <h1>Puppy Adoption Page</h1>
+    <h2>Please enter your information to adopt a puppy and we'll email you back.</h2>
+    <p>Please Note: First Name, Last Name, Password, and Email are required</p>
+    <form action="" method="get">
+        <label for="firstnametag">First Name:</label>
+        <input id="firstnametag" type="text" name="firstname" placeholder="First Name">
+        <label for="lastnametag">Last Name:</label>
+        <input id="lastnametag" type="text" name="lastname" placeholder="Last Name">
+        <br>
+        <label for="emailtag">Email:</label>
+        <input type="email" name="email" id="emailtag" placeholder="example@email.com">
+        <label for="passwdtag">Password:</label>
+        <input type="password" name="password" id="passwdtag">
+        <br>
+
+        <p>Are you over age 18?</p>
+        <label for="yestag">Yes:</label>
+        <input type="radio" name="age_choice" id="yestag" value="yesOver">
+        <label for="notag">No:</label>
+        <input type="radio" name="age_choice" id="notag" value="noOver">
+
+        <p>Do you have a Credit Card or PayPal?</p>
+        <select name="payment" id="">
+            <option value="creditcard">Credit Card</option>
+            <option value="paypal">PayPal</option>
+        </select>
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
