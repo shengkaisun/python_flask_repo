@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Basics</title>
+</head>
+<body>
+    <form action="http://www.google.com" method="GET">
+        <h1>Log in</h1>
+        <p>Please input your email and password:</p>
+
+        <label for="emailtag">Email: </label>
+        <input id="emailtag" type="email" name="email" placeholder="example@example.com"
+        ><br>
+        
+        <label for="passwordtag">Password: </label>
+        <input id="passwordtag" type="password" name="password" placeholder="password"
+        ><br>
+        
+        <input type="color" name="color" placeholder=""><br>
+        <input type="submit" name="Login" value="Login">
+    </form>
+
+    <form action="" method="GET">
+        <h3>Do you already own a dog?</h3>
+        <label for="yes">Yes:</label>
+        <input id="yes" type="radio" name="dog_choice" value="yes">
+
+        <label for="no">No:</label>
+        <input id="no" type="radio" name="dog_choice" value="no">
+
+        <p>How clean is your house?</p>
+        <select name="stars" id="">
+            <option value="Great">3</option>
+            <option value="Good">2</option>
+            <option value="Bad">1</option>
+        </select>
+
+        <p>Any other comments?</p>
+        <textarea name="comments" id="" cols="30" rows="10"></textarea>
+        <br>
+        <input type="submit" name="" value="Submit feedback">
+    </form>
+</body>
+</html>
