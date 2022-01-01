@@ -1,0 +1,28 @@
+{% extends "exercise_base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="p-4 p-md-5 mt-4 text-dark rounded bg-light">
+        <div class="px-0 lead my-3">
+            <h2>Welcome to Puppy User Name Check</h2>
+            <p>Let's see if your User Name is secure!</p>
+            <p>
+                Fill out the form below with a User Name that meets the requirements below:
+            </p>
+            <ul>
+                <li>Must have an upper case letter somewhere.</li>
+                <li>Must have a lower case somewhere.</li>
+                <li>Must have a number at the end.</li>
+            </ul>
+
+            <form action="{{url_for('check_username')}}">
+                <label for="username">Username:</label>
+                <input type="text" name="username">
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

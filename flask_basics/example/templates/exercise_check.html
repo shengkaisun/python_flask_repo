@@ -1,0 +1,34 @@
+{% extends "exercise_base.html" %}
+
+{% block content %}
+
+<p></p>
+<div class="container">
+    <div class="p-4 p-md-5 mt-4 text-dark rounded bg-light">
+        <div class="px-0 lead my-3">
+            <h2>Username Security Check</h2>
+            <p>Your username is <i>{{username}}</i>.</p> 
+            
+            {% if check['upper'] and check['lower'] and check['num'] %}
+                <p>Awesome! Your username meets all the requirements!</p>
+            {% else %}
+                <p>Sorry, the check failed. Here are what you missed:</p>
+                <ul>
+                    {% if not check['upper'] %}
+                        <li>You did not use an upper case character.</li>
+                    {% endif %}
+                    {% if not check['lower'] %}
+                        <li>You did not use a lower case character.</li>
+                    {% endif %}
+                    {% if not check['num'] %}
+                        <li>You did not have a number.</li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+
+            
+        </div>
+    </div>
+</div>
+
+{% endblock %}
