@@ -1,7 +1,8 @@
 from flask import Flask, render_template, session, redirect, url_for
+from flask import flash
 from flask_wtf import FlaskForm
 from wtforms import (StringField, BooleanField, DateTimeField, 
-                    RadioField, SelectField, TextField, TextAreaField, 
+                    RadioField, SelectField, TextAreaField, 
                     SubmitField)
 
 from wtforms.validators import DataRequired
@@ -33,11 +34,12 @@ def index():
         session['mood'] = form.mood.data
         session['food'] = form.food_choice.data
         session['feedback'] = form.feedback.data
+        flash('Submission success, breed: {}!'.format(session['breed']))
         # Redirect to another page up on submission
         return redirect(url_for('confirm'))
         #breed = form.breed.data
         #form.breed.data = ''
-    return render_template('index.html', form=form)
+    return render_template('form_fields_index.html', form=form)
 
 @app.route('/confirm')
 def confirm():

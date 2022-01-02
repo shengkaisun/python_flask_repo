@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% for msg in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">            
+        </button>
+        {{ msg }}
+    </div>
+{% endfor %}
+
+<div class="container">
+    <h1>Thank you! Here is the info you gave us:</h1>
+    <ul>
+        <li>Breed: {{session['breed']}}</li>
+        <li>Neutered: {{session['neutered']}}</li>
+        <li>Mood: {{session['mood']}}</li>
+        <li>Food: {{session['food']}}</li>
+        <li>Feedback: {{session['feedback']}}</li>
+    
+    </ul>
+</div>
+
+
+{% endblock %}
