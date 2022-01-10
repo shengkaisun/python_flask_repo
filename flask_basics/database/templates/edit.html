@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <h1>Edit puppy info</h1>
+
+    {% if pup %}
+        <p>Update the info below:</p>
+        <form action="" method="POST">
+            {{form.hidden_tag()}}
+            {{form.name.label}}{{form.name}}
+            {{form.submit()}}
+        </form>
+    {% else %}
+        <p>Invalid pup id: {{form.id.data}}</p>
+    {% endif %}
+   
+</div>
+
+{% endblock %}
