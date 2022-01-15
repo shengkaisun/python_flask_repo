@@ -27,11 +27,44 @@ class Puppy(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Text)
 
+    # Other related tables
+    owner = db.relationship('Owner', backref='puppy', uselist=False)
+    toys = db.relationship('Toy', backref='puppy', lazy='dynamic')
+
     def __init__(self, name):
         self.name = name
 
     def __repr__(self):
-        return f"Puppy name: {self.name}"
+        if self.owner:
+            return f"Puppy name: {self.name}, owner: {self.owner.name}"
+        else:
+            return f"Puppy name: {self.name}"
+
+class Owner(db.Model):
+    __tablename__ = 'owners'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.Text)
+    puppy_id = db.Column(db.Integer, db.ForeignKey('puppies.id'))
+
+    def __init__(self, name, puppy_id):
+        self.name = name
+        self.puppy_id = puppy_id
+    
+    def __repr__(self):
+        return f"Owner name: {self.name}"
+
+class Toy(db.Model):
+    __tablename__ = 'toys'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.Text)
+    puppy_id = db.Column(db.Integer, db.ForeignKey('puppies.id'))
+
+    def __init__(self, name, puppy_id):
+        self.name = name
+        self.puppy_id = puppy_id
+    
+    def __repr__(self):
+        return f"Toy name: {self.name}, belongs to puppy id: {self.puppy_id}"
 
 ################################
 ### View Function ###
@@ -94,6 +127,17 @@ def edit_pup(id):
             pup.name = form.name.data
             # pup.owner = form.owner
             print('Update name: {}'.format(pup.name))
+            if form.owner.data:
+                if pup.owner:
+                    # Update current owner data
+                    pup.owner.name = form.owner.data
+                else:
+                    # Create a new owner entry
+                    owner = Owner(form.owner.data, pup.id)
+                    db.session.add(owner)
+            if form.toy.data:
+                toy = Toy(form.toy.data, pup.id)
+                db.session.add(toy)
             db.session.commit()
         return redirect(url_for('list_pup'))
     
@@ -101,6 +145,11 @@ def edit_pup(id):
 
     if pup:
         form.name.data = pup.name
+        if pup.owner:
+            form.owner.data = pup.owner.name
+        if pup.toys:
+            for toy in pup.toys:
+                form.toy.data = toy.name
 
     return render_template('edit.html', pup=pup, form=form)
 

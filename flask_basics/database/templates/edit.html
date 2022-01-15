@@ -7,8 +7,10 @@
     {% if pup %}
         <p>Update the info below:</p>
         <form action="" method="POST">
-            {{form.hidden_tag()}}
-            {{form.name.label}}{{form.name}}
+            {{form.hidden_tag()}} <br>
+            {{form.name.label}}{{form.name}} <br>
+            {{form.owner.label}} {{form.owner}} <br>
+            {{form.toy.label}} {{form.toy}} <br>
             {{form.submit()}}
         </form>
     {% else %}

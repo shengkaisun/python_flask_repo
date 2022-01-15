@@ -5,7 +5,7 @@ pip install FLask-Migrate
 
 # Set up env
 # MacOS/Linux
-export FLASK_APP = myapp.py
+export FLASK_APP=myapp.py
 
 # Set up the migration directory
 flask db init

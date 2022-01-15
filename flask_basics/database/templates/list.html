@@ -10,6 +10,7 @@
                         <span>Id </span>{{ delform.id(value = pup.id, disabled=True) }}</>
                         {#% set delform.id.data = 4 %#}
                         {{ delform.submit() }}
+                        <a class="btn btn-secondary" href="{{url_for('edit_pup', id=pup.id)}}" role="button">Edit</a>
                     </form>
                  </li>
             {% endfor %}

@@ -12,7 +12,8 @@ class DelForm(FlaskForm):
 class EditForm(FlaskForm):
     id = IntegerField("Id")
     name = StringField("Puppy Name")
+    owner = StringField("Owner")
+    toy = StringField("Toy")
     submit = SubmitField('Update')
-    #owner = StringField("Owner")
 
         
