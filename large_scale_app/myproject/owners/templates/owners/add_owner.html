@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+        <h1>Add a new owner to our database</h1>
+        <form action="" method="post">
+            {{form.hidden_tag()}}
+            {{form.name.label}}{{form.name()}} <br>
+            {{form.pup_id.label}}{{form.pup_id()}} <br>
+            {{form.submit()}}
+        </form>
+    </div>
+    
+{% endblock %}

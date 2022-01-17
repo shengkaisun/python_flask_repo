@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <h1>Here is a list of all available puppies:</h1>
+        <ul>
+            {% for pup in puppies %}
+                <li>
+                    {{pup}} 
+                    <form action="" method="POST">
+                        {{ delform.hidden_tag() }}
+                        <span>Id </span> {{delform.id(value = pup.id, render_kw={'readonly': True})}}
+                        {#% set delform.id.data = 4 %#}
+                        {{ delform.submit }}
+
+                    </form>
+                 </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}
