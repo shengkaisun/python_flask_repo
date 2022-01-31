@@ -10,3 +10,6 @@ pip install email_validator
 pip install flask_login
 
 pip install Flask-Dance
+
+# Install image handler
+pip install --upgrade Pillow
