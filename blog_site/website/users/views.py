@@ -1,0 +1,70 @@
+from flask import render_template, url_for, flash, redirect, request, Blueprint
+from flask_login import login_user, current_user, logout_user, login_required
+from website import db
+from website.models import User, BlogPost
+from website.users.forms import RegistrationForm, LoginForm, UpdateUserForm
+from website.users.picture_handler import add_profile_pic
+
+users = Blueprint('users', __name__)
+
+# Register view
+@users.route('/register', methods=['POST', 'GET'])
+def register():
+    form = RegistrationForm()
+
+    if form.validate_on_submit():
+        user = User(email=form.email.data, 
+                    username=form.username.data,
+                    password=form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        flash('Thanks for registration!')
+        return redirect(url_for('users.login'))
+    
+    return render_template('register.html', form=form)
+
+# Login view
+@users.route('/login', methods=['POST', 'GET'])
+def login():
+    form = LoginForm()
+
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user and user.check_password(form.password.data):
+            login_user(user)
+            flash("Log in success!")
+            next = request.args.get('next')
+            if not next or next[0] == '/':
+                next = url_for('core.index')
+            return redirect(next)
+    
+    return render_template('login.html', form=form)
+
+# Logout view
+@users.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('core.index'))
+
+# Account (update UserForm)
+@users.route('/account', methods=['POST', 'GET'])
+@login_required
+def account():
+    form = UpdateUserForm()
+    if form.validate_on_submit():
+        if form.picture.data:
+            username = current_user.username
+            pic = add_profile_pic(form.picture.data, username)
+            current_user.profile_image = pic # file path for the profile image
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        flash("User account updated!")
+        return redirect(url_for('users.account'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+    
+    profile_image = url_for('static', filename='profile_pics/'+current_user.profile_image)
+    return render_template('account.html', profile_image=profile_image, form=form)
+
+# User's list of Blog posts

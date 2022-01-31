@@ -26,6 +26,8 @@ login_manager.login_view = 'users.login'
 
 from website.core.views import core
 from website.errors.handlers import error_pages
+from website.users.views import users
 
 app.register_blueprint(core)
 app.register_blueprint(error_pages)
+app.register_blueprint(users)
