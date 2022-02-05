@@ -26,22 +26,27 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{{url_for('core.info')}}">About</a>
                 </li>
-                
-                <li class="nav-item">
-                  <a class="nav-link ">Log out</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link ">Account</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Create Post</a>
-                </li>
+               
+                {% if current_user.is_authenticated %}
+                  <li class="nav-item">
+                    <a class="nav-link " href="{{url_for('users.logout')}}">Log out</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link " href="{{url_for('users.account')}}">Account</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Create Post</a>
+                  </li>
+                {% endif %}
               </ul>
           </div>
-          <div class="collapse navbar-collapse justify-content-end">
-              <a href="#" class="btn btn-outline-primary me-2" role="button">Log in</a>
-              <a href="#" class="btn btn-primary" role="button">Register</a>
-          </div>
+
+          {% if not current_user.is_authenticated %}
+            <div class="collapse navbar-collapse justify-content-end">
+                <a href="{{url_for('users.login')}}" class="btn btn-outline-primary me-2" role="button">Log in</a>
+                <a href="{{url_for('users.register')}}" class="btn btn-primary" role="button">Register</a>
+            </div>
+          {% endif %}
     </nav>
 
     <div class="container">

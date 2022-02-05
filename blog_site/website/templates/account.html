@@ -1,21 +1,22 @@
 {% extends "base.html" %}
-{% block content % }
+{% block content %}
     <div class="col-lg-6">
         <div align='center'>
             <h1 class="display-5 fw-bold lh-1 mb-3">Account Profile: {{current_user.username}} </h1>
-            <img src="{{url_for('static', filename='profile_pics/'+current_user.profile_image)}}" alt="">
+            <img src="{{url_for('static', filename='profile_pics/'+current_user.profile_image)}}" alt="" width="80" height="80">
+            <p>{{current_user.email}}</p>
         </div>
     </div>
 
     <div class="container">
-        <form action="" method="POST">
+        <form action="" method="POST" enctype="multipart/form-data">
             {{form.hidden_tag()}}
             <div class="mb-3">
                 {{form.username.label(class="form-label")}} 
                 {{form.username(class="form-control")}}
             </div>
             <div class="mb-3">
-                {{form.email.label(class="form-label"))}} 
+                {{form.email.label(class="form-label")}} 
                 {{form.email(class="form-control")}}
             </div>
             <div class="mb-3">

@@ -58,6 +58,7 @@ def account():
             current_user.profile_image = pic # file path for the profile image
         current_user.username = form.username.data
         current_user.email = form.email.data
+        db.session.commit()
         flash("User account updated!")
         return redirect(url_for('users.account'))
     elif request.method == 'GET':
