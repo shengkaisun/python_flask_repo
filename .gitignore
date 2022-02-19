@@ -132,6 +132,8 @@ dmypy.json
 # User added
 flask_basics/database/migrations/
 large_scale_app/myproject/migrations/
+blog_site/migrations/
+migrations/
 .DS_Store
 
 *.sqlite
