@@ -18,6 +18,7 @@ class PuppyName(Resource):
                 return pup
         return {'name': None}, 404
 
+
     def post(self, name):
         pup = {'name': name}
 

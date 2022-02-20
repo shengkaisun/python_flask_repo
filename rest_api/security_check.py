@@ -6,8 +6,10 @@ users = [
     User(3, 'Eric', 'password'),
 ]
 
-usernames = {u.username for u in users}
-userids = {u.id for u in users}
+# Build dictionary {username: user_obj}
+usernames = {u.username:u for u in users}
+# Build dictionary {userid: user_obj}
+userids = {u.id:u for u in users}
 
 def authenticate(username, password):
     # Check if username exists
@@ -16,5 +18,5 @@ def authenticate(username, password):
         return user
 
 def identity(payload):
-    userid = payload.get('identity', None)
+    userid = payload['identity']
     return userids.get(userid, None)
